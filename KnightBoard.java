@@ -45,7 +45,9 @@ public class KnightBoard{
       {row-1, col-2},
       {row+1, col-2}
     };
-    
+    for (int i = 0; i < moves.length; i++) {
+      if (moves[i][0] > board.length || moves[i][0] < 0 || moves[i][1] > board[])
+    }
   }
   /**
   *@throws IllegalStateException when the board contains non-zero values.

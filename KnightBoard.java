@@ -35,17 +35,17 @@ public class KnightBoard{
       return true;
     }
     int[][] moves = new int[][] {
-      {startingRow+2, col-1},
-      {row+2, col+1},
-      {row-2, col-1},
-      {row-2, col+1},
-      {row-1, col+2},
+      {startingRow+2, startingCol-1},
+      {startingRow+2, startingCol+1},
+      {startingRow-2, startingCol-1},
+      {startingRow-2, startingCol+1},
+      {startingRow-1, startingRow+2},
       {row+1, col+2},
       {row-1, col-2},
       {row+1, col-2}
     };
     for (i = 0; i < moves.length; i++) {
-      
+
     }
   }
 

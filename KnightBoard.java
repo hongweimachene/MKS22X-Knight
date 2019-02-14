@@ -31,12 +31,11 @@ public class KnightBoard{
   }
 
   private boolean solveH(int startingRow, int startingCol, int level) {
-
-  }
-
-  private boolean addKnight(int row, int col) {
+    if (level == startingRow * startingCol) {
+      return true;
+    }
     int[][] moves = new int[][] {
-      {row+2, col-1},
+      {startingRow+2, col-1},
       {row+2, col+1},
       {row-2, col-1},
       {row-2, col+1},
@@ -45,9 +44,22 @@ public class KnightBoard{
       {row-1, col-2},
       {row+1, col-2}
     };
-    for (int i = 0; i < moves.length; i++) {
-      if (moves[i][0] > board.length || moves[i][0] < 0 || moves[i][1] > board[])
+    for (i = 0; i < moves.length; i++) {
+      
     }
+  }
+
+  private boolean addKnight(int row, int col, int level) {
+
+    for (int i = 0; i < moves.length; i++) {
+      if (moves[i][0] < board.length && moves[i][0] >= 0 && moves[i][1] < board[0].length && moves[i][1] >= 0) {
+        if (board[moves[i][0]][moves[i][1]] == 0) {
+          board[moves[i][0]][moves[i][1]] = level;
+          return true;
+        }
+      }
+    }
+    return false;
   }
   /**
   *@throws IllegalStateException when the board contains non-zero values.

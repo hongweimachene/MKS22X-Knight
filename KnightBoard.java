@@ -39,24 +39,23 @@ public class KnightBoard{
       {startingRow+2, startingCol+1},
       {startingRow-2, startingCol-1},
       {startingRow-2, startingCol+1},
-      {startingRow-1, startingRow+2},
-      {row+1, col+2},
-      {row-1, col-2},
-      {row+1, col-2}
+      {startingRow-1, startingCol+2},
+      {startingRow+1, startingCol+2},
+      {startingRow-1, startingCol-2},
+      {startingRow+1, startingCol-2}
     };
-    for (i = 0; i < moves.length; i++) {
-
+    for (int i = 0; i < moves.length; i++) {
+      if (moves[i][0] < board.length && moves[i][0] >= 0 && moves[i][1] < board[0].length && moves[i][1] >= 0) {
+        
+      }
     }
   }
 
-  private boolean addKnight(int row, int col, int level) {
-
-    for (int i = 0; i < moves.length; i++) {
-      if (moves[i][0] < board.length && moves[i][0] >= 0 && moves[i][1] < board[0].length && moves[i][1] >= 0) {
-        if (board[moves[i][0]][moves[i][1]] == 0) {
-          board[moves[i][0]][moves[i][1]] = level;
-          return true;
-        }
+  private boolean addKnight(int row, int col, int level, int[][] moves) {
+    if (moves[i][0] < board.length && moves[i][0] >= 0 && moves[i][1] < board[0].length && moves[i][1] >= 0) {
+      if (board[moves[i][0]][moves[i][1]] == 0) {
+        board[moves[i][0]][moves[i][1]] = level;
+        return true;
       }
     }
     return false;

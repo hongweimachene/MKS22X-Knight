@@ -31,7 +31,7 @@ public class KnightBoard{
   }
 
   private boolean solveH(int startingRow, int startingCol, int level) {
-    if (level == board.length * board[0].length) {
+    if (level > board.length * board[0].length) {
       return true;
     }
     int[][] moves = new int[][] {
@@ -78,7 +78,7 @@ public class KnightBoard{
   // }
   public static void main(String[] args) {
     KnightBoard a = new KnightBoard(5,5);
-    System.out.println(a.solve(3,4));
+    System.out.println(a.solve(0,0));
     System.out.println(a);
   }
 

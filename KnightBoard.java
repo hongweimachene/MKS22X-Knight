@@ -68,14 +68,40 @@ public class KnightBoard{
     return true;
   }
 
-  // /**
-  // *@throws IllegalStateException when the board contains non-zero values.
-  // *@throws IllegalArgumentException when either parameter is negative or out of bounds.
-  // *@return the number of solutions from the starting position specified
-  // */
-  // public int countSolutions(int startingRow, int startingCol) {
-  //
-  // }
+  /**
+  *@throws IllegalStateException when the board contains non-zero values.
+  *@throws IllegalArgumentException when either parameter is negative or out of bounds.
+  *@return the number of solutions from the starting position specified
+  */
+  public int countSolutions(int startingRow, int startingCol) {
+    return countSolutionsH(startingRow, startingCol, 1);
+  }
+
+  private int countSolutionsH(int startingRow, int startingCol, int level) {
+    int count = 0;
+    int[][] moves = new int[][] {
+      {startingRow+2, startingCol-1},
+      {startingRow+2, startingCol+1},
+      {startingRow-2, startingCol-1},
+      {startingRow-2, startingCol+1},
+      {startingRow-1, startingCol+2},
+      {startingRow+1, startingCol+2},
+      {startingRow-1, startingCol-2},
+      {startingRow+1, startingCol-2}
+    };
+    if (addKnight(startingRow, startingCol, level)) {
+      if (level == board.length * board[0].length) {
+        removeKnight(startingRow, startingCol);
+        return 1;
+      }
+      for (int i = 0; i < moves.length; i++) {
+        count+=countSolutionsH(moves[i][0], moves[i][1], level+1);
+      }
+      removeKnight(startingRow, startingCol);
+    }
+    return count;
+  }
+
   public static void main(String[] args) {
     KnightBoard a = new KnightBoard(5,5);
     System.out.println(a.solve(0,0));

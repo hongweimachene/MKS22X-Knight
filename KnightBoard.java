@@ -1,10 +1,12 @@
 public class KnightBoard{
   private int[][] board;
+  private Tile[][] data;
 
   /** @throws IllegalArgumentException when either parameter is <= 0.*/
   public KnightBoard(int startingRows,int startingCols) {
     if (startingRows < 0 || startingCols < 0) throw new IllegalArgumentException();
     board = new int[startingRows][startingCols];
+    data = new Tile[startingRows][startingCols];
   }
 
   public String toString() {
@@ -124,6 +126,29 @@ public class KnightBoard{
     return count;
   }
 
+  private String fillEdges() {
+    String s = "";
+    for (int i = 0; i < data.length; i++) {
+      for (int j = 0; j < data[i].length; j++) {
+        data[i][j] = new Tile(i, j, 8);
+        if (i == 1 || j == 1|| i == data.length - 2 || j == data.length - 2) {
+          data[i][j] = new Tile(i, j, 6);
+        }
+        if (i == 0 || j == 0 || i == data.length - 1 || j == data.length - 1 || (i == data.length - 2 || i == 1 && j == 1) || (i == 1 && j == data[i].length - 2) || (i == data.length - 2 && j == data[i].length - 2)) {
+          data[i][j] = new Tile(i, j, 4);
+        }
+        if ((i == 1 || i == data.length - 2 && j == 0) || (j == 1 || j ==data[i].length - 2 && i == data.length - 1) || (j == 1 || j == data[i].length - 2 && i == 0) || (i == 1 || i == data.length - 2 && j == data[i].length - 1)){
+          data[i][j] = new Tile(i, j, 3);
+        }
+        if ((j == 0 || j == data[i].length -1 && i == 0) || (j == 0 || j == data[i].length - 1 && i == data.length - 1)) {
+          data[i][j] = new Tile(i, j, 2);
+        }
+        s += "" + data[i][j];
+      }
+      s += "\n";
+    }
+    return s;
+  }
 
 
   public static void main(String[] args) {

@@ -1,4 +1,4 @@
-public class Tile implements Comparable<Tile> {
+public class Tile {
   private int row, col, moves;
   public Tile(int rows, int cols, int edges) {
     row = rows;
@@ -14,5 +14,8 @@ public class Tile implements Comparable<Tile> {
   public int getMoves() {
     return moves;
   }
-  
+
+  public String toString() {
+    return "" + moves;
+  }
 }

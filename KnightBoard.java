@@ -1,7 +1,9 @@
 public class KnightBoard{
   private int[][] board;
+  //data structure
   private Tile[][] data;
 
+  //Constructor
   /** @throws IllegalArgumentException when either parameter is <= 0.*/
   public KnightBoard(int startingRows,int startingCols) {
     if (startingRows < 0 || startingCols < 0) throw new IllegalArgumentException();
@@ -32,6 +34,7 @@ public class KnightBoard{
       }
     }
   }
+  //to check if board has anything other than 0
   private boolean isEmpty(){
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[i].length; j++) {
@@ -54,9 +57,11 @@ public class KnightBoard{
   }
 
   private boolean solveH(int startingRow, int startingCol, int level) {
+    //when it reaches all tiles on the board, it is solved
     if (level > board.length * board[0].length) {
       return true;
     }
+    //array of possible moves given coordinates
     int[][] moves = new int[][] {
       {startingRow+2, startingCol-1},
       {startingRow+2, startingCol+1},
@@ -67,10 +72,13 @@ public class KnightBoard{
       {startingRow-1, startingCol-2},
       {startingRow+1, startingCol-2}
     };
+    //add beginning position
     if (addKnight(startingRow, startingCol, level)) {
+      //loop through all possible moves from the inital position, continue recursively for next moves
       for (int i = 0; i < moves.length; i++) {
         if (solveH(moves[i][0], moves[i][1], level+1)) return true;
       }
+      //if no move in the array is possible, remove the knight
       removeKnight(startingRow, startingCol);
     }
     return false;
@@ -103,7 +111,9 @@ public class KnightBoard{
   }
 
   private int countSolutionsH(int startingRow, int startingCol, int level) {
+    //number of solutions
     int count = 0;
+    ////array of possible moves given coordinates
     int[][] moves = new int[][] {
       {startingRow+2, startingCol-1},
       {startingRow+2, startingCol+1},
@@ -115,32 +125,41 @@ public class KnightBoard{
       {startingRow+1, startingCol-2}
     };
     if (addKnight(startingRow, startingCol, level)) {
+      //base case, if it reaches the end of the board, remove that piece and go through other moves, return 1 as a solution was found
       if (level == board.length * board[0].length) {
         removeKnight(startingRow, startingCol);
         return 1;
       }
+      //loop through all possible moves from the inital position, continue recursively for next moves, adding on to the number of solutions
       for (int i = 0; i < moves.length; i++) {
         count+=countSolutionsH(moves[i][0], moves[i][1], level+1);
       }
+      ////if no move in the array is possible, remove the knight
       removeKnight(startingRow, startingCol);
     }
     return count;
   }
 
+  //initialize data structure
   private String fillEdges() {
     String s = "";
     for (int i = 0; i < data.length; i++) {
       for (int j = 0; j < data[i].length; j++) {
+        //majority of the board can make 8 moves max 
         data[i][j] = new Tile(i, j, 8);
+        //cases for 6 moves
         if (i == 1 || j == 1|| i == data.length - 2 || j == data.length - 2) {
           data[i][j] = new Tile(i, j, 6);
         }
+        //cases for 4 moves
         if (i == 0 || j == 0 || i == data.length - 1 || j == data.length - 1 || (i == data.length - 2 || i == 1 && j == 1) || (i == 1 && j == data[i].length - 2) || (i == data.length - 2 && j == data[i].length - 2)) {
           data[i][j] = new Tile(i, j, 4);
         }
+        //cases for 3 moves
         if ((i == 1 || i == data.length - 2 && j == 0) || (j == 1 || j ==data[i].length - 2 && i == data.length - 1) || (j == 1 || j == data[i].length - 2 && i == 0) || (i == 1 || i == data.length - 2 && j == data[i].length - 1)){
           data[i][j] = new Tile(i, j, 3);
         }
+        //cases for 2 moves
         if ((j == 0 || j == data[i].length -1 && i == 0) || (j == 0 || j == data[i].length - 1 && i == data.length - 1)) {
           data[i][j] = new Tile(i, j, 2);
         }
@@ -149,13 +168,6 @@ public class KnightBoard{
       s += "\n";
     }
     return s;
-  }
-
-
-  public static void main(String[] args) {
-    KnightBoard a = new KnightBoard(5,5);
-    System.out.println(a.solve(0,0));
-    System.out.println(a);
   }
 
 }

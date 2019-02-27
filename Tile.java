@@ -1,4 +1,4 @@
-public class Tile {
+public class Tile{
   private int row, col, moves;
   public Tile(int rows, int cols, int edges) {
     row = rows;
